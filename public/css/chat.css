@@ -1,0 +1,91 @@
+body
+{
+    background-color: lightgray;
+}
+.container
+{
+    background-color: white;
+    box-shadow: 0 0 15px gray;
+    margin: 50px auto;
+    padding: 15px;
+}
+header{
+background-color: slategray;
+padding: 20px;
+text-align: center;
+font-weight: bold;
+color: white;
+text-shadow: 0 0 5px black;
+
+}
+label,h6
+{
+    font-style: italic;
+    color: rgb(148, 148, 148);
+}
+main{
+padding: 20px;
+
+}
+footer
+{
+background-color: rgb(58,71,83);
+color: white;
+text-align: center;
+font-size: 80%;
+padding: 10px;
+letter-spacing: 3px;
+}
+.chat-messages
+{
+    height: 500px;
+    border:1px solid black;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 3px;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+
+}
+.message
+{
+    background-color: silver;
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    position: relative;
+}
+.message::after
+{
+    content: '';
+    position: absolute;
+    display: block;
+    width: 10px;
+    z-index: 1;
+    border-style: solid;
+    border-color: transparent #efefef transparent transparent;
+    border-width: 10px 15px 10px 0;
+    top: 33px;
+    left: -15px;
+    margin-top: -20px;
+}
+p{
+    padding: 0;
+    margin: 0;
+}
+.uname
+{
+    color: black;
+    font-weight: bold;
+}
+span
+{
+    float: right;
+    color: slategray;
+    font-style: italic;
+    font-size: 85%;
+    padding-right: 10px;
+}
