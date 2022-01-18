@@ -62,6 +62,9 @@ function outputMessage(message)
 {
     const div=document.createElement('div');
     div.classList.add('message');
+    div.classList.add('animate__animated');
+    div.classList.add('animate__slideInLeft');
+    div.classList.add('animate__faster');
     const p=document.createElement('p');
     p.classList.add('uname');
     p.innerText=message.username;
@@ -70,7 +73,6 @@ function outputMessage(message)
     const p2=document.createElement('p');
     p2.innerText=message.text;
     div.appendChild(p2);    
-    
     chatMessages.appendChild(div);
 }
 

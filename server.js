@@ -52,7 +52,7 @@ io.on('connection',(socket)=>{
     socket.on('message',(msg)=>{
         const user=getCurentUser(socket.id);
         //broadcastmessage another user
-        socket.broadcast.to(user.room).emit('message',fromatmessage(user.name,msg));
+        io.to(user.room).emit('message',fromatmessage(user.name,msg));
     });
 
     //when anybody typing...
