@@ -53,9 +53,15 @@ io.on('connection',(socket)=>{
         const user=getCurentUser(socket.id);
         //broadcastmessage another user
         socket.broadcast.to(user.room).emit('message',fromatmessage(user.name,msg));
-    })
+    });
 
-    //user leave the chat
+    //when anybody typing...
+    socket.on('typing',(id)=>{
+        const user=getCurentUser(id);
+        socket.broadcast.to(user.room).emit('typing',`${user.name} is typing...`);
+    });
+
+    //user leave the room
     socket.on('disconnect',()=>{
         const user=userLeave(socket.id);
         // broadcast to another users

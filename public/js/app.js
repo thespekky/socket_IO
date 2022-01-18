@@ -4,6 +4,7 @@ let userslist=document.querySelector('#userslist');
 let chatMessages=document.querySelector('.chat-messages');
 let msgTxt=document.querySelector('#msgTxt');
 let sendBtn=document.querySelector('#sendBtn');
+let feedbackbox=document.querySelector('#feedback');
 
 //client connected to the server
 socket.emit('JoinToRoom');
@@ -20,8 +21,17 @@ socket.on('message',(msg)=>{
     outputMessage(msg);
 });
 
+//when user is typing
+msgTxt.addEventListener('keypress',()=>{
+    socket.emit('typing',socket.id);
+});
 
-document.addEventListener('click',()=>{
+//listening for typing
+socket.on('typing',(msg)=>{
+    feedback(msg);
+})
+
+sendBtn.addEventListener('click',()=>{
     let msg=msgTxt.value;
     if(msg!='')
     {
@@ -62,4 +72,15 @@ function outputMessage(message)
     div.appendChild(p2);    
     
     chatMessages.appendChild(div);
+}
+
+// add feedback to DOM
+function feedback(msg)
+{
+    feedbackbox.innerHTML=msg;
+    setTimeout(clearfeedback,1500);
+}
+function clearfeedback()
+{
+    feedbackbox.innerHTML='';
 }
