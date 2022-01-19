@@ -100,3 +100,10 @@ button
 {
     margin-top: 10px;
 }
+#hiba
+{
+    font-weight: bold;
+    font-style: normal;
+    color: red;
+    letter-spacing: 1.5;
+}

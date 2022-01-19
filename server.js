@@ -33,16 +33,46 @@ pool.getConnection((err,connection)=>{
 });
 
 app.get('/',(req,res)=>{
-    res.render('index');
+    let hiba="";
+    res.render('index',{hiba});
 });
 app.get('/register',(req,res)=>{
-    res.render("register");
+    let hiba='';
+    res.render("register",{hiba});
 });
 app.post('/reg',(req,res)=>{
-    const conn=mysql.createConnection();
+    let hiba='';
+    let username=req.body.username;
+    let passwd1=req.body.passwd1;
+    let passwd2=req.body.passwd2;
+    pool.query(`SELECT * FROM users WHERE username='${username}'`,(err,results)=>{
+        if(err)throw err;
+        if(results.length!=0)
+        {
+            hiba='A felhasználó létezik';
+            res.render('register',{hiba});
+        }
+        else
+        {
+            if(passwd1!=passwd2)
+            {
+                hiba='A jelszó nem egyezik';
+                res.render('register',{hiba});
+            }
+            else
+            {
+                pool.query(`INSERT INTO users (username, password) VALUES ('${username}','${passwd1}')`,(err)=>{
+                    if(err)throw err;
+                    let hiba='';
+                    res.render('index',{hiba});
+                });
+            }
+        }
+    })
 })
 
 app.post('/chat',(req,res)=>{
+    let hiba="";
     let username=req.body.nickname;
     let password=req.body.password;
     pool.query(`SELECT * FROM users WHERE username='${username}' AND password='${password}'`,(err,results)=>{
@@ -55,7 +85,8 @@ app.post('/chat',(req,res)=>{
         }
         else
         {
-            
+            hiba="rossz adatok";
+            res.render('index',{hiba});
         }
 
     });
