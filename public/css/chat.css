@@ -96,3 +96,7 @@ font-style: italic;
 font-size: 80%;
 height: 25px;
 }
+button
+{
+    margin-top: 10px;
+}

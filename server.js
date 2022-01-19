@@ -3,12 +3,20 @@ const express=require('express');
 var session=require('express-session');
 const ejs=require('ejs');
 const socketio=require('socket.io');
+const mysql=require('mysql');
 const {joinUser,getRoomUsers,userLeave,getCurentUser}=require('./utils/users.js');
 const {fromatmessage}=require('./utils/messages.js');
 const app=express();
 const server=http.createServer(app);
 const port=3000;
 const io=socketio(server);
+
+const pool=mysql.createPool({
+    host:'localhost',
+    user:'root',
+    password:'',
+    database:'214szft_socket'
+});
 
 app.set('view engine','ejs');
 app.use(express.static('public'));
@@ -19,15 +27,38 @@ app.use(session({
     saveUninitialized:true
 }));
 
+pool.getConnection((err,connection)=>{
+    if(err)throw err;
+    console.log("Connected to database Connid:"+connection.threadId);
+});
+
 app.get('/',(req,res)=>{
     res.render('index');
 });
+app.get('/register',(req,res)=>{
+    res.render("register");
+});
+app.post('/reg',(req,res)=>{
+    const conn=mysql.createConnection();
+})
 
 app.post('/chat',(req,res)=>{
-    session.nickname=req.body.nickname;
-    session.roomname=req.body.room;
-   //console.log(nickname,roomname);
-    res.render('chat');
+    let username=req.body.nickname;
+    let password=req.body.password;
+    pool.query(`SELECT * FROM users WHERE username='${username}' AND password='${password}'`,(err,results)=>{
+        if(err)throw err;
+        if(results.length!=0)
+        {
+            session.nickname=req.body.nickname;
+            session.roomname=req.body.room;
+            res.render('chat');
+        }
+        else
+        {
+            
+        }
+
+    });
 });
 io.on('connection',(socket)=>{
     //console.log('scoket connected...'+socket.id);

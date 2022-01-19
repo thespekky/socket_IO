@@ -1,7 +1,10 @@
 <%- include('header')%>
             <form action="/chat" method="POST">
+                <label for="hiba" name="hiba"></label>
                 <label for="nickname">Nickname:</label>
                 <input type="text" name="nickname" class="form-control mb-2" placeholder="give your nick name..." >
+                <label for="password">password:</label>
+                <input type="text" name="password" class="form-control mb-2" placeholder="give your password..." >
                 <label for="room">Room name:</label>
                 <select name="room"class="form-control mb-2" id="">
                     <option value="Main room">Main room</option>
@@ -13,4 +16,5 @@
                 </select>
                 <button class="btn btn-secondary">Join to room</button>
             </form>
+            <a href="/register"> <button class="btn btn-secondary">register</button></a>
 <%- include('footer')%>
