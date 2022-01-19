@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Jan 19. 13:23
--- Kiszolgáló verziója: 10.4.6-MariaDB
--- PHP verzió: 7.3.8
+-- Létrehozás ideje: 2022. Jan 19. 17:45
+-- Kiszolgáló verziója: 10.4.17-MariaDB
+-- PHP verzió: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -21,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `214szft_socket`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `messages`
+--
+
+CREATE TABLE `messages` (
+  `room` text COLLATE utf8_hungarian_ci NOT NULL,
+  `username` text COLLATE utf8_hungarian_ci NOT NULL,
+  `time` time NOT NULL,
+  `message` text COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `messages`
+--
+
+INSERT INTO `messages` (`room`, `username`, `time`, `message`) VALUES
+('Main room', 'spekkypro', '17:06:00', 'teszt message'),
+('Main room', 'spekkypro', '17:07:00', 'üzenet 2'),
+('Main room', 'spekkypro', '17:36:00', 'teszt');
 
 -- --------------------------------------------------------
 

@@ -10,6 +10,7 @@ const app=express();
 const server=http.createServer(app);
 const port=3000;
 const io=socketio(server);
+const moment=require('moment');
 
 const pool=mysql.createPool({
     host:'localhost',
@@ -17,6 +18,7 @@ const pool=mysql.createPool({
     password:'',
     database:'214szft_socket'
 });
+
 
 app.set('view engine','ejs');
 app.use(express.static('public'));
@@ -102,7 +104,7 @@ io.on('connection',(socket)=>{
 
         //update room info
         io.to(user.room).emit('updateRoom',session.roomname,getRoomUsers(session.roomname));
-
+        
         //welcome curent user
         socket.emit('message',fromatmessage('System',`Welcome to ${user.room}!`));
 
@@ -115,6 +117,10 @@ io.on('connection',(socket)=>{
         const user=getCurentUser(socket.id);
         //broadcastmessage another user
         io.to(user.room).emit('message',fromatmessage(user.name,msg));
+        let time=moment().format('H:mm');
+        pool.query(`INSERT INTO messages (room,username,time,message) VALUES ('${user.room}','${user.name}','${time}','${msg}')`,(err)=>{
+            if(err)throw err;
+        });
     });
 
     //when anybody typing...
