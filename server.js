@@ -87,6 +87,7 @@ app.post('/chat',(req,res)=>{
                 if(err)throw err;
                 res.render('chat',{results});
             })
+            
 
         }
         else
