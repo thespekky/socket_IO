@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Jan 19. 17:45
+-- Létrehozás ideje: 2022. Jan 20. 15:57
 -- Kiszolgáló verziója: 10.4.17-MariaDB
 -- PHP verzió: 8.0.1
 
@@ -41,7 +41,10 @@ CREATE TABLE `messages` (
 INSERT INTO `messages` (`room`, `username`, `time`, `message`) VALUES
 ('Main room', 'spekkypro', '17:06:00', 'teszt message'),
 ('Main room', 'spekkypro', '17:07:00', 'üzenet 2'),
-('Main room', 'spekkypro', '17:36:00', 'teszt');
+('Main room', 'spekkypro', '17:36:00', 'teszt'),
+('Main room', 'spekkypro', '15:27:00', 'asddsateszt01.20'),
+('Frontend room', 'XD', '15:47:00', 'asdsfg'),
+('Frontend room', 'XD', '15:55:00', 'ghgsfdgg123');
 
 -- --------------------------------------------------------
 
