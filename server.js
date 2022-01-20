@@ -83,7 +83,12 @@ app.post('/chat',(req,res)=>{
         {
             session.nickname=req.body.nickname;
             session.roomname=req.body.room;
-            res.render('chat');
+            pool.query(`SELECT * FROM messages WHERE room='${req.body.room}'`,(err,results)=>{
+                if(err)throw err;
+                res.render('chat',{results});
+            })
+           // res.render('chat');
+
         }
         else
         {

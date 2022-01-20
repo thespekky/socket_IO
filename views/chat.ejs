@@ -10,7 +10,12 @@
     <section class="col-sm-9">
         <h6>Chat stream</h6>
         <div class="chat-messages">
-
+            <% for(let i=0;i<results.length;i++){%>
+                <div class="message animate__animated animate__slideInLeft animate__faster" >
+                    <p class="uname"><%=results[i].username%>  <span><%= results[i].time %></span> </p>
+                    <p><%=results[i].message%></p>
+                </div>
+            <%}%>
         </div>
         <div id="feedback"></div>
         <div class="input-group">
